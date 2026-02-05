@@ -16,10 +16,10 @@ const GlobalLocations: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           <div>
-            <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-6 block">Our Offices</span>
-            <h2 className="font-serif text-5xl text-charcoal-900 mb-8">Local Expertise. <br/> Global Reach.</h2>
+            <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-6 block">Find Us</span>
+            <h2 className="font-serif text-5xl text-charcoal-900 mb-8">One Studio. <br/> Endless Possibilities.</h2>
             <p className="text-stone-500 font-medium leading-relaxed max-w-md">
-              With headquarters in major financial capitals, Tong Studio offers unparalleled access to international real estate markets.
+              Tong Studio is your go-to space for podcast recording, photoshoots, and content creation. Professional gear, flexible hours, and a team that gets it.
             </p>
           </div>
 

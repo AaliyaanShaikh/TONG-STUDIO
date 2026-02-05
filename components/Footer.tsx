@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                 transition={{ duration: 0.4, delay: 0.35 }}
                 className="text-black/55 text-sm leading-relaxed whitespace-nowrap mt-2"
               >
-                Premier real estate. Exceptional properties. Your next chapter starts here.
+                Podcast, photoshoot & content studio. Professional spaces for creators and brands.
               </motion.p>
             </div>
           </div>
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
             <div className="h-px w-10 bg-black/30 mb-4" />
             <p className={`${SECTION_LABEL} mb-4`}>Company</p>
             <ul className="space-y-3">
-              {['Our Team', 'Careers', 'Press', 'Market Reports'].map((item) => (
+              {['Our Team', 'Careers', 'Press', 'Portfolio'].map((item) => (
                 <li key={item}>
                   <a href="#" className={`block ${LINK_STYLE}`}>{item}</a>
                 </li>
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
             <div className="h-px w-10 bg-black/30 mb-4" />
             <p className={`${SECTION_LABEL} mb-4`}>Legal</p>
             <ul className="space-y-3">
-              {['Fair Housing', 'Terms of Use', 'Privacy Policy', 'Accessibility'].map((item) => (
+              {['Terms of Use', 'Privacy Policy', 'Accessibility'].map((item) => (
                 <li key={item}>
                   <a href="#" className={`block ${LINK_STYLE}`}>{item}</a>
                 </li>
@@ -131,7 +131,6 @@ const Footer: React.FC = () => {
       <div className="border-t border-black/10">
         <div className={`max-w-6xl mx-auto ${FOOTER_PADDING} py-4 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] uppercase tracking-widest text-black/45 font-bold`}>
           <p>© {currentYear} Tong Studio. ALL RIGHTS RESERVED. DESIGNED BY EZOR.</p>
-          <p>Equal Housing Opportunity</p>
         </div>
       </div>
     </footer>

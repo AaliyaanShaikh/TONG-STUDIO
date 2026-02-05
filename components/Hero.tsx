@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
               className="block"
             >
-              Guiding
+              Create.
             </motion.span>
           </div>
           <div className="overflow-hidden">
@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.65, ease: "easeOut" }}
               className="block italic text-stone-500"
             >
-              You Home
+              Record. Shine.
             </motion.span>
           </div>
         </h1>
@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.85, ease: "easeOut" }}
             className="text-charcoal-800 text-sm md:text-lg font-medium leading-relaxed border-l-2 border-champagne-500 pl-6"
           >
-            Tong Studio is an elite brokerage dedicated to connecting exceptional individuals with the world's most extraordinary properties.
+            Tong Studio is a creative space for podcast recording, photoshoots, and content creation. Professional setups, flexible booking, and a team that helps you bring your vision to life.
           </motion.p>
         </div>
       </div>
@@ -78,15 +78,15 @@ const Hero: React.FC = () => {
         className="absolute bottom-12 w-full px-6 md:px-20 flex justify-between items-end text-charcoal-900 text-[10px] uppercase tracking-widest z-20"
       >
         <div className="flex gap-8 font-bold">
-          <span>Sales</span>
-          <span>Rentals</span>
-          <span>Development</span>
+          <span>Podcast</span>
+          <span>Photoshoot</span>
+          <span>Events</span>
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
            <div className="w-[1px] h-12 bg-charcoal-900"></div>
            <span>Explore</span>
         </div>
-        <div className="font-bold">Global Brokerage</div>
+        <div className="font-bold">Book a Session</div>
       </motion.div>
     </div>
   );

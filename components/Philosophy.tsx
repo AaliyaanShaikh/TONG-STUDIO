@@ -27,10 +27,10 @@ const Philosophy: React.FC = () => {
              <div className="mb-24">
                 <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-6 block">Our Approach</span>
                 <h2 className="font-serif text-5xl md:text-7xl text-charcoal-900 mb-10 leading-[1.1]">
-                  Integrity, <br/> <span className="italic text-stone-500">Insight, & Trust.</span>
+                  Quality, <br/> <span className="italic text-stone-500">Creativity, & Care.</span>
                 </h2>
                 <p className="text-xl font-light leading-relaxed text-charcoal-800 mb-12">
-                  At Tong Studio, we believe that real estate is more than a transaction; it is the stewardship of your legacy. Our brokers are advisors first, providing unbiased counsel based on decades of market data.
+                  At Tong Studio, we believe every project deserves a space that elevates it. Whether you're recording a podcast, shooting a campaign, or hosting an intimate event, we provide the setup, support, and flexibility to make it happen.
                 </p>
              </div>
 
@@ -42,9 +42,9 @@ const Philosophy: React.FC = () => {
                  transition={{ duration: 0.8 }}
                >
                  <span className="text-xs font-bold text-champagne-600 mb-2 block">01</span>
-                 <h3 className="font-serif text-3xl mb-4 text-charcoal-900">Market Intelligence</h3>
+                 <h3 className="font-serif text-3xl mb-4 text-charcoal-900">Professional Setup</h3>
                  <p className="text-stone-500 font-medium leading-relaxed">
-                    We leverage proprietary data to identify trends before they emerge. Whether buying or selling, our clients operate with an information advantage.
+                    Fully equipped podcast booths, cyclorama walls, and versatile backdrops. We handle the tech so you can focus on content and creativity.
                  </p>
                </motion.div>
                
@@ -55,9 +55,9 @@ const Philosophy: React.FC = () => {
                  transition={{ duration: 0.8 }}
                >
                  <span className="text-xs font-bold text-champagne-600 mb-2 block">02</span>
-                 <h3 className="font-serif text-3xl mb-4 text-charcoal-900">Personal Advisory</h3>
+                 <h3 className="font-serif text-3xl mb-4 text-charcoal-900">Flexible Booking</h3>
                  <p className="text-stone-500 font-medium leading-relaxed">
-                    Every client is unique. We tailor our strategy to your specific financial goals and lifestyle requirements, ensuring a seamless experience.
+                    Hourly, half-day, or full-day sessions. We work around your schedule and scale up for larger productions or intimate recordings.
                  </p>
                </motion.div>
 
@@ -68,9 +68,9 @@ const Philosophy: React.FC = () => {
                  transition={{ duration: 0.8 }}
                >
                  <span className="text-xs font-bold text-champagne-600 mb-2 block">03</span>
-                 <h3 className="font-serif text-3xl mb-4 text-charcoal-900">Global Network</h3>
+                 <h3 className="font-serif text-3xl mb-4 text-charcoal-900">End-to-End Support</h3>
                  <p className="text-stone-500 font-medium leading-relaxed">
-                    Our partnerships extend to 40 countries, giving your property international exposure to qualified buyers.
+                    From pre-production planning to on-the-day assistance, our team is here to ensure your podcast, shoot, or event runs smoothly.
                  </p>
                </motion.div>
              </div>

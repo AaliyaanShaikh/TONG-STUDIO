@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const stats = [
-  { label: 'Properties Sold', value: '750', suffix: '+' },
-  { label: 'Market Value', value: '12', suffix: 'B+' },
-  { label: 'Active Agents', value: '45', suffix: '' },
-  { label: 'Years Serving', value: '36', suffix: '' },
+  { label: 'Sessions Completed', value: '2.5', suffix: 'K+' },
+  { label: 'Studio Spaces', value: '4', suffix: '' },
+  { label: 'Creators Served', value: '500', suffix: '+' },
+  { label: 'Years in Studio', value: '10', suffix: '+' },
 ];
 
 const StatsSection: React.FC = () => {

@@ -62,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({
           transition={{ duration: 0.4, ease: 'easeOut' }}
           className="hidden md:flex items-center gap-8 px-8 py-4 rounded-full border bg-white/90 backdrop-blur-md border-stone-200 shadow-sm"
         >
-          <button type="button" onClick={() => handleNavClick('properties')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Properties</button>
+          <button type="button" onClick={() => handleNavClick('spaces')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Spaces</button>
           <button type="button" onClick={() => handleNavClick('about')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">About</button>
           <button type="button" onClick={() => handleNavClick('journal')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Journal</button>
           <button type="button" onClick={() => openContact()} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Contact</button>
@@ -101,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({
             className="fixed inset-0 bg-white z-40 pointer-events-auto flex items-center justify-center"
           >
             <div className="flex flex-col space-y-8 text-center">
-              <button type="button" onClick={() => handleNavClick('properties')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Properties</button>
+              <button type="button" onClick={() => handleNavClick('spaces')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Spaces</button>
               <button type="button" onClick={() => handleNavClick('about')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">About</button>
               <button type="button" onClick={() => handleNavClick('journal')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Journal</button>
               <button type="button" onClick={() => { openContact(); setIsMobileMenuOpen(false); }} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Contact</button>

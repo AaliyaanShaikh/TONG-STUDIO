@@ -24,7 +24,7 @@ const Preloader: React.FC = () => {
           transition={{ delay: 0.7, duration: 1 }}
           className="mt-2 text-xs md:text-sm uppercase text-stone-500 font-medium"
         >
-          Luxury Real Estate
+          Podcast & Photoshoot Studio
         </motion.div>
       </div>
       

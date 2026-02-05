@@ -3,20 +3,20 @@ import { motion } from 'framer-motion';
 
 const articles = [
   {
-    category: 'Market Report',
-    title: 'Q3 2024 Market Analysis: Stability in Luxury Sectors',
+    category: 'Studio Tips',
+    title: 'How to Get Broadcast-Quality Sound in Your Podcast',
     date: 'Oct 12, 2024',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop'
   },
   {
-    category: 'Neighborhood Focus',
-    title: 'The Rise of West Chelsea: Art, Architecture, and Living',
+    category: 'Behind the Scenes',
+    title: 'Setting Up for a Product Photoshoot: What We Use',
     date: 'Sep 28, 2024',
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2670&auto=format&fit=crop'
   },
   {
-    category: 'Architecture',
-    title: 'Defining Pre-War Charm: What Buyers Look For',
+    category: 'Creators',
+    title: 'Why More Brands Are Choosing Studio Rentals Over On-Location',
     date: 'Sep 15, 2024',
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop'
   }
@@ -28,11 +28,11 @@ const Journal: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-end mb-16">
            <div>
-             <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Market Insights</span>
-             <h2 className="font-serif text-4xl text-charcoal-900">Broker's Journal</h2>
+             <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-4 block">From the Studio</span>
+             <h2 className="font-serif text-4xl text-charcoal-900">Journal</h2>
            </div>
            <button className="hidden md:block text-stone-500 hover:text-charcoal-900 text-xs uppercase tracking-widest transition-colors pb-2 border-b border-stone-200 hover:border-charcoal-900 font-bold">
-             Read All Reports
+             Read All
            </button>
         </div>
 

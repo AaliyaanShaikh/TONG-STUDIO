@@ -5,27 +5,27 @@ import { Landmark, Key, Users, Briefcase } from 'lucide-react';
 const services = [
   {
     icon: <Landmark size={28} />,
-    title: "Valuation",
+    title: "Podcast Studio",
     image: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?q=80&w=2574&auto=format&fit=crop",
-    desc: "Accurate, data-driven property appraisals."
+    desc: "Sound-treated booths and pro mics for crisp, clear recordings."
   },
   {
     icon: <Briefcase size={28} />,
-    title: "Investment",
+    title: "Photoshoot",
     image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2670&auto=format&fit=crop",
-    desc: "Strategic portfolio management and acquisition."
+    desc: "Cyclorama, backdrops, and natural light for stills and video."
   },
   {
     icon: <Key size={28} />,
-    title: "Management",
+    title: "Video & Content",
     image: "https://images.unsplash.com/photo-1560518883-3d1312f9c1be?q=80&w=2574&auto=format&fit=crop",
-    desc: "Comprehensive property management services."
+    desc: "Full production support for reels, interviews, and campaigns."
   },
   {
     icon: <Users size={28} />,
-    title: "Relocation",
+    title: "Events & Workshops",
     image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2669&auto=format&fit=crop",
-    desc: "Seamless corporate and family relocation."
+    desc: "Intimate launches, workshops, and team recordings."
   }
 ];
 
@@ -39,10 +39,10 @@ const LifestyleSection: React.FC = () => {
           viewport={{ once: true }}
           className="mb-20 max-w-xl"
         >
-          <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Broker Services</span>
-          <h2 className="font-serif text-5xl text-charcoal-900 mb-6 leading-tight">Expertise at <br/><span className="italic text-stone-500">Every Step</span></h2>
+          <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-4 block">What We Offer</span>
+          <h2 className="font-serif text-5xl text-charcoal-900 mb-6 leading-tight">Studio Services <br/><span className="italic text-stone-500">for Creators</span></h2>
           <p className="text-stone-600 font-medium text-lg">
-            We provide a full suite of real estate services designed to maximize value and minimize stress for our clients.
+            From podcast recording and photo shoots to video production and small events, we offer flexible spaces and support for every kind of project.
           </p>
         </motion.div>
 

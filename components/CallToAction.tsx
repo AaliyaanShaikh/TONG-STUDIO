@@ -41,7 +41,7 @@ const CallToAction: React.FC<CallToActionProps> = ({ onOpenContact }) => {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-xl font-medium text-white mb-12 max-w-2xl mx-auto drop-shadow-sm"
         >
-          Schedule a private consultation with our advisory team.
+          Book a session for podcast, photoshoot, or your next project.
         </motion.p>
         <motion.button
           type="button"
@@ -50,7 +50,7 @@ const CallToAction: React.FC<CallToActionProps> = ({ onOpenContact }) => {
           whileTap={{ scale: 0.95 }}
           className="border border-white text-white px-12 py-5 uppercase tracking-[0.2em] text-sm font-bold transition-all duration-300 backdrop-blur-sm hover:backdrop-blur-none"
         >
-          Contact Brokerage
+          Book the Studio
         </motion.button>
       </div>
     </section>
