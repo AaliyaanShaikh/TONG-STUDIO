@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.85, ease: "easeOut" }}
             className="text-charcoal-800 text-sm md:text-lg font-medium leading-relaxed border-l-2 border-champagne-500 pl-6"
           >
-            Urban Nest is an elite brokerage dedicated to connecting exceptional individuals with the world's most extraordinary properties.
+            Tong Studio is an elite brokerage dedicated to connecting exceptional individuals with the world's most extraordinary properties.
           </motion.p>
         </div>
       </div>

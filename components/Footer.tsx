@@ -16,17 +16,6 @@ const Footer: React.FC = () => {
         {/* Brand + CTA row */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 pb-10 md:pb-12 border-b border-black/10">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <img
-                src="/LOGO.png"
-                alt="Urban Nest Luxury Real Estate"
-                className="h-20 md:h-24 lg:h-28 w-auto object-contain bg-white"
-              />
-            </motion.div>
             <div>
               <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[0.92] text-black whitespace-nowrap">
                 <motion.span
@@ -35,7 +24,7 @@ const Footer: React.FC = () => {
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-block"
                 >
-                  URBAN NEST
+                  TONG STUDIO
                 </motion.span>
               </h2>
               <motion.p
@@ -49,7 +38,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
           <motion.a
-            href="mailto:brokerage@urbannest.com"
+            href="mailto:contact@tongstudio.com"
             initial={{ opacity: 0, x: 16 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 16 }}
             transition={{ duration: 0.4, delay: 0.45 }}
@@ -72,8 +61,8 @@ const Footer: React.FC = () => {
               </p>
               <p className="flex items-center gap-2.5">
                 <Mail className="w-3.5 h-3.5 shrink-0 text-black/40" />
-                <a href="mailto:brokerage@urbannest.com" className={LINK_STYLE}>
-                  brokerage@urbannest.com
+                <a href="mailto:contact@tongstudio.com" className={LINK_STYLE}>
+                  contact@tongstudio.com
                 </a>
               </p>
               <p>
@@ -141,7 +130,7 @@ const Footer: React.FC = () => {
       {/* Bottom bar */}
       <div className="border-t border-black/10">
         <div className={`max-w-6xl mx-auto ${FOOTER_PADDING} py-4 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] uppercase tracking-widest text-black/45 font-bold`}>
-          <p>© {currentYear} Urban Nest Properties. ALL RIGHTS RESERVED. DESIGNED BY EZOR.</p>
+          <p>© {currentYear} Tong Studio. ALL RIGHTS RESERVED. DESIGNED BY EZOR.</p>
           <p>Equal Housing Opportunity</p>
         </div>
       </div>

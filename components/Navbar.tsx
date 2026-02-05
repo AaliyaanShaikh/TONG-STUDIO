@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({
             className="font-serif text-2xl font-bold tracking-wide cursor-pointer text-black hover:text-charcoal-800 transition-colors"
             onClick={onNavigateHome}
           >
-            URBAN NEST
+            TONG STUDIO
           </div>
         </div>
 

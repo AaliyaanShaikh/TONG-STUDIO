@@ -1,95 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import ContactForm from './components/ContactForm.tsx';
 import Hero from './components/Hero';
-import PropertyShowcase from './components/PropertyShowcase';
 import StatsSection from './components/StatsSection';
 import LifestyleSection from './components/LifestyleSection';
 import Journal from './components/Journal';
 import GlobalLocations from './components/GlobalLocations';
-import CallToAction from './components/CallToAction.tsx';
-import AIChatWidget from './components/AIChatWidget';
+import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
 import Philosophy from './components/Philosophy';
-import FeaturedProperties from './components/FeaturedProperties';
-import PersonalBrandSection from './components/PersonalBrandSection';
-import { Property, ViewState } from './types';
-import { generatePropertyDescription } from './services/geminiService';
 import { motion, AnimatePresence } from 'framer-motion';
-import PropertyGrid from './components/PropertyGrid';
-import CinematicGrid from './components/CinematicGrid.tsx';
+import PropertyShowcase from './components/PropertyShowcase';
 
 function App() {
-  const [view, setView] = useState<ViewState>(ViewState.HOME);
-  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
-  const [aiDescription, setAiDescription] = useState<string | null>(null);
-  const [isLoadingDesc, setIsLoadingDesc] = useState(false);
   const [loading, setLoading] = useState(true);
   const [scrollToSectionId, setScrollToSectionId] = useState<string | null>(null);
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
-    // Simulate initial load for preloader
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2500); // 2.5s preloader
+    const timer = setTimeout(() => setLoading(false), 2500);
     return () => clearTimeout(timer);
   }, []);
 
-  // Open contact form popup when site finishes loading (after preloader)
-  useEffect(() => {
-    if (!loading) {
-      const timer = setTimeout(() => setIsContactOpen(true), 400);
-      return () => clearTimeout(timer);
-    }
-  }, [loading]);
-
-  // Scroll to top on view change
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [view]);
-
-  // Generate AI description when property is opened
-  useEffect(() => {
-    if (selectedProperty) {
-      setAiDescription(null);
-      setIsLoadingDesc(true);
-      generatePropertyDescription(selectedProperty.title, selectedProperty.features)
-        .then(desc => {
-          setAiDescription(desc);
-          setIsLoadingDesc(false);
-        });
-    }
-  }, [selectedProperty]);
-
-  const handlePropertySelect = (property: Property) => {
-    setSelectedProperty(property);
-    setView(ViewState.DETAILS);
-  };
-
-  const handleNavigateHome = () => {
-    setView(ViewState.HOME);
-    setSelectedProperty(null);
-  };
-
   const handleNavigateToSection = (sectionId: string) => {
-    if (view === ViewState.DETAILS) {
-      setView(ViewState.HOME);
-      setSelectedProperty(null);
-    }
     setScrollToSectionId(sectionId);
   };
 
+  const handlePropertySelect = () => {};
+
   useEffect(() => {
-    if (view !== ViewState.HOME || !scrollToSectionId) return;
+    if (!scrollToSectionId) return;
     const t = setTimeout(() => {
-      const el = document.getElementById(scrollToSectionId!);
+      const el = document.getElementById(scrollToSectionId);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setScrollToSectionId(null);
     }, 300);
     return () => clearTimeout(t);
-  }, [view, scrollToSectionId]);
+  }, [scrollToSectionId]);
 
   return (
     <div className="min-h-screen bg-alabaster text-charcoal-900 font-sans selection:bg-champagne-200 selection:text-black">
@@ -100,60 +46,24 @@ function App() {
       {!loading && (
         <>
           <Navbar
-            onNavigateHome={handleNavigateHome}
+            onNavigateHome={() => {}}
             onNavigateToSection={handleNavigateToSection}
-            isContactOpen={isContactOpen}
-            onOpenContact={() => setIsContactOpen(true)}
-            onCloseContact={() => setIsContactOpen(false)}
           />
-          <ContactForm
-            isOpen={isContactOpen}
-            onClose={() => setIsContactOpen(false)}
-          />
-          
-          <AnimatePresence mode="wait">
-            {view === ViewState.HOME && (
-              <motion.div
-                key="home"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <Hero />
-                <StatsSection />
-                <Philosophy />
-                <PropertyShowcase onPropertySelect={handlePropertySelect} />
-                <PersonalBrandSection />
-                <CinematicGrid />
-                <Journal />
-                <LifestyleSection />
-                <PropertyGrid />
-                <GlobalLocations />
-                <CallToAction onOpenContact={() => setIsContactOpen(true)} />
-              </motion.div>
-            )}
-
-            {view === ViewState.DETAILS && selectedProperty && (
-              <motion.div
-                key="details"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <FeaturedProperties
-                  property={selectedProperty}
-                  aiDescription={aiDescription}
-                  isLoadingDesc={isLoadingDesc}
-                  onNavigateHome={handleNavigateHome}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Hero />
+            <StatsSection />
+            <Philosophy />
+            <PropertyShowcase onPropertySelect={handlePropertySelect} />
+            <Journal />
+            <LifestyleSection />
+            <GlobalLocations />
+            <CallToAction />
+          </motion.div>
           <Footer />
-          <AIChatWidget />
         </>
       )}
     </div>
