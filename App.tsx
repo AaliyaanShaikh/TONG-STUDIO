@@ -11,6 +11,10 @@ import Preloader from './components/Preloader';
 import Philosophy from './components/Philosophy';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropertyShowcase from './components/PropertyShowcase';
+import FlipWords from './components/FlipWords';
+import AppleScrollSection from './components/AppleScrollSection';
+import ImageTextGrid from './components/ImageTextGrid';
+import AnimGrid from './components/AnimGrid';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -58,6 +62,10 @@ function App() {
             <StatsSection />
             <Philosophy />
             <PropertyShowcase onPropertySelect={handlePropertySelect} />
+            <AppleScrollSection />
+            <FlipWords />
+            <ImageTextGrid />
+            <AnimGrid />
             <Journal />
             <LifestyleSection />
             <GlobalLocations />

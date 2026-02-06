@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <nav className="fixed w-full z-50 py-6 px-6 md:px-12 pointer-events-none text-charcoal-900">
-      <div className="flex justify-between items-start">
+      <div className="relative flex justify-between items-start">
         {/* Logo - black text so it shows on hero */}
         <div className="pointer-events-auto">
            <div
@@ -51,7 +51,7 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Desktop Menu - Floating Pill: hidden at top, appears when you scroll past hero */}
+        {/* Desktop Menu - Floating Pill: centered in viewport, appears when you scroll past hero */}
         <motion.div
           initial={false}
           animate={{
@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({
             pointerEvents: isScrolled ? 'auto' : 'none',
           }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="hidden md:flex items-center gap-8 px-8 py-4 rounded-full border bg-white/90 backdrop-blur-md border-stone-200 shadow-sm"
+          className="hidden md:flex items-center gap-8 px-8 py-4 rounded-full border bg-white/90 backdrop-blur-md border-stone-200 shadow-sm absolute left-1/2 top-0 -translate-x-1/2"
         >
           <button type="button" onClick={() => handleNavClick('spaces')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Spaces</button>
           <button type="button" onClick={() => handleNavClick('about')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">About</button>
