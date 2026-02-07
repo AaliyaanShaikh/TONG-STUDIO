@@ -5,6 +5,7 @@ const SLIDES = [
   {
     bg: "/67c831063b63647b70a176ce_Nest%205.webp",
     label: "Established 1988",
+    title: "Create.",
     subtitle: "Record. Shine.",
     description:
       "Tong Studio is a creative space for podcast recording, photoshoots, and content creation.",
@@ -92,6 +93,20 @@ const Hero: React.FC = () => {
   const clipPaths = [clip0, clip1, clip2, clip3];
   const SLIDE_COUNT = SLIDES.length;
 
+  // Incoming: zoom in (0.96→1); outgoing: zoom out (1→0.96) over each segment
+  const scaleInOut = (p: number, start: number, end: number) => {
+    if (p <= start) return 0.96;
+    if (p >= end) return 0.96;
+    const t = (p - start) / (end - start);
+    if (t <= 0.5) return 0.96 + (t / 0.5) * 0.04;
+    return 1 - ((t - 0.5) / 0.5) * 0.04;
+  };
+  const scale0 = useTransform(smoothProgress, (p) => scaleInOut(p, 0, 0.25));
+  const scale1 = useTransform(smoothProgress, (p) => scaleInOut(p, 0.25, 0.5));
+  const scale2 = useTransform(smoothProgress, (p) => scaleInOut(p, 0.5, 0.75));
+  const scale3 = useTransform(smoothProgress, (p) => scaleInOut(p, 0.75, 1));
+  const bgScales = [scale0, scale1, scale2, scale3];
+
   // Only the current segment's text is visible – prevents overlap (no clip boundary bleed)
   const visible0 = useTransform(smoothProgress, (p) => (Math.min(3, Math.floor(p * 4)) === 0 ? "visible" : "hidden"));
   const visible1 = useTransform(smoothProgress, (p) => (Math.min(3, Math.floor(p * 4)) === 1 ? "visible" : "hidden"));
@@ -119,7 +134,16 @@ const Hero: React.FC = () => {
             }}
             className="overflow-hidden"
           >
-            <div className="absolute inset-0 w-full h-full">
+            <motion.div
+              style={{
+                position: "absolute",
+                inset: 0,
+                scale: bgScales[i],
+                willChange: "transform",
+                transformOrigin: "center center",
+              }}
+              className="w-full h-full"
+            >
               <img
                 src={slide.bg}
                 alt=""
@@ -131,7 +155,7 @@ const Hero: React.FC = () => {
                 }}
                 loading={i === 0 ? "eager" : "lazy"}
               />
-            </div>
+            </motion.div>
           </motion.div>
         ))}
 
