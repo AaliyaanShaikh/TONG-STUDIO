@@ -1,93 +1,211 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+
+const SLIDES = [
+  {
+    bg: "/67c831063b63647b70a176ce_Nest%205.webp",
+    label: "Established 1988",
+    subtitle: "Record. Shine.",
+    description:
+      "Tong Studio is a creative space for podcast recording, photoshoots, and content creation.",
+    footer: ["Podcast", "Photoshoot", "Events"],
+  },
+  {
+    bg: "/67c831063b63647b70a176cd_Exec%202.webp",
+    label: "The Space",
+    title: "Designed",
+    subtitle: "to perform.",
+    description:
+      "Professional setups, flexible booking, and a team that helps you bring your vision to life.",
+    footer: ["Studios", "Equipment", "Support"],
+  },
+  {
+    bg: "/67c831063b63647b70a176cc_Apex%201.webp",
+    label: "Your Vision",
+    title: "Capture.",
+    subtitle: "Broadcast. Grow.",
+    description:
+      "From intimate recordings to full productions—one space, endless possibilities.",
+    footer: ["Record", "Stream", "Publish"],
+  },
+  {
+    bg: "/67c831063b63647b70a17704_Cove%203.webp",
+    label: "Book Now",
+    title: "Ready",
+    subtitle: "when you are.",
+    description: "Professional setups, flexible booking. Bring your vision to life.",
+    footer: ["Explore", "Book a Session"],
+  },
+];
 
 const Hero: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        window.innerWidth < 768 ||
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      );
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Scroll delay: lower stiffness + higher damping so animation lags behind scroll
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: isMobile ? 30 : 50,
+    damping: isMobile ? 35 : 45,
+    restDelta: isMobile ? 0.01 : 0.001,
+    mass: isMobile ? 1.5 : 1.8,
+  });
+
+  // Background: clip-path reveal from bottom to top (previous effect) – each slide clips over its 25% segment
+  const clip0 = useTransform(smoothProgress, (p) => {
+    if (p <= 0) return "inset(0 0 0% 0)";
+    if (p >= 0.25) return "inset(0 0 100% 0)";
+    return `inset(0 0 ${(p / 0.25) * 100}% 0)`;
+  });
+  const clip1 = useTransform(smoothProgress, (p) => {
+    if (p <= 0.25) return "inset(0 0 0% 0)";
+    if (p >= 0.5) return "inset(0 0 100% 0)";
+    return `inset(0 0 ${((p - 0.25) / 0.25) * 100}% 0)`;
+  });
+  const clip2 = useTransform(smoothProgress, (p) => {
+    if (p <= 0.5) return "inset(0 0 0% 0)";
+    if (p >= 0.75) return "inset(0 0 100% 0)";
+    return `inset(0 0 ${((p - 0.5) / 0.25) * 100}% 0)`;
+  });
+  const clip3 = useTransform(smoothProgress, (p) => {
+    if (p <= 0.75) return "inset(0 0 0% 0)";
+    if (p >= 1) return "inset(0 0 100% 0)";
+    return `inset(0 0 ${((p - 0.75) / 0.25) * 100}% 0)`;
+  });
+
+  const clipPaths = [clip0, clip1, clip2, clip3];
+  const SLIDE_COUNT = SLIDES.length;
+
+  // Only the current segment's text is visible – prevents overlap (no clip boundary bleed)
+  const visible0 = useTransform(smoothProgress, (p) => (Math.min(3, Math.floor(p * 4)) === 0 ? "visible" : "hidden"));
+  const visible1 = useTransform(smoothProgress, (p) => (Math.min(3, Math.floor(p * 4)) === 1 ? "visible" : "hidden"));
+  const visible2 = useTransform(smoothProgress, (p) => (Math.min(3, Math.floor(p * 4)) === 2 ? "visible" : "hidden"));
+  const visible3 = useTransform(smoothProgress, (p) => (Math.min(3, Math.floor(p * 4)) === 3 ? "visible" : "hidden"));
+  const textVisibility = [visible0, visible1, visible2, visible3];
+
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-alabaster">
-      {/* Background Image - Slow Pan */}
-      <motion.div 
-        initial={{ scale: 1.05, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-        className="absolute inset-0 z-0"
-      >
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=2692&auto=format&fit=crop")' }}
-        />
-        {/* White Gradient Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent" />
-      </motion.div>
-
-      {/* Content */}
-      <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-20 pt-20">
-        <div className="overflow-hidden mb-8">
-          <motion.div 
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-            className="flex items-center gap-4"
+    <div ref={containerRef} className="relative h-[400vh] bg-alabaster">
+      {/* Sticky frame: whole screen sticks; only backgrounds inside animate with scroll */}
+      <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
+        {/* Background layers: clip-path reveal + zoom in as you scroll through each segment */}
+        {SLIDES.map((slide, i) => (
+          <motion.div
+            key={`bg-${i}`}
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: SLIDE_COUNT - i,
+              clipPath: clipPaths[i],
+              willChange: isMobile ? "clip-path" : "clip-path",
+              transform: "translateZ(0)",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+            }}
+            className="overflow-hidden"
           >
-             <div className="h-[2px] w-12 bg-charcoal-900"></div>
-             <p className="text-charcoal-900 tracking-[0.3em] uppercase text-xs font-bold">
-                Established 1988
-             </p>
+            <div className="absolute inset-0 w-full h-full">
+              <img
+                src={slide.bg}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  willChange: "transform",
+                  transform: "translateZ(0)",
+                  backfaceVisibility: "hidden",
+                }}
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+            </div>
           </motion.div>
-        </div>
+        ))}
 
-        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl text-charcoal-900 leading-[0.9] tracking-tighter mb-10">
-          <div className="overflow-hidden">
-            <motion.span 
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-              className="block"
-            >
-              Create.
-            </motion.span>
+        {/* Text in original place – only current segment visible (visibility) so text never overlaps */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-between px-6 md:px-20 pt-20 pb-12 pointer-events-none">
+          <div className="relative flex-1 flex flex-col justify-center">
+            {SLIDES.map((slide, i) => (
+              <motion.div
+                key={`content-${i}`}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  visibility: textVisibility[i],
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  willChange: "visibility",
+                  transform: "translateZ(0)",
+                  backfaceVisibility: "hidden",
+                }}
+                className="pointer-events-none"
+              >
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-[2px] w-12 bg-champagne-400" />
+                  <p className="text-champagne-300 tracking-[0.3em] uppercase text-xs font-bold">
+                    {slide.label}
+                  </p>
+                </div>
+                <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter mb-10">
+                  <span className="block text-white">{slide.title}</span>
+                  <span className="block italic text-stone-400">{slide.subtitle}</span>
+                </h1>
+                <p className="max-w-md text-white/95 text-sm md:text-lg font-medium leading-relaxed border-l-2 border-champagne-400 pl-6">
+                  {slide.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
-          <div className="overflow-hidden">
-            <motion.span 
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.5, delay: 0.65, ease: "easeOut" }}
-              className="block italic text-stone-500"
+          <div className="relative flex justify-between items-end text-[10px] uppercase tracking-widest min-h-[4rem] pointer-events-auto">
+            {SLIDES.map((slide, i) => (
+              <motion.div
+                key={`footer-${i}`}
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  visibility: textVisibility[i],
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end",
+                  willChange: "visibility",
+                  transform: "translateZ(0)",
+                  backfaceVisibility: "hidden",
+                }}
+                className="pointer-events-none px-0"
+              >
+                <div className="flex gap-8 font-bold text-white">
+                  {slide.footer.map((item, j) => (
+                    <span key={j}>{item}</span>
+                  ))}
+                </div>
+                <div className="font-bold text-champagne-200">Book a Session</div>
+              </motion.div>
+            ))}
+            <div
+              className="absolute left-1/2 flex flex-col items-center gap-2 text-champagne-300"
+              style={{ transform: "translateX(-50%)", pointerEvents: "none" }}
             >
-              Record. Shine.
-            </motion.span>
+              <div className="w-[1px] h-12 bg-champagne-400" />
+              <span>Scroll</span>
+            </div>
           </div>
-        </h1>
-
-        <div className="max-w-md overflow-hidden">
-          <motion.p 
-            initial={{ y: '100%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.85, ease: "easeOut" }}
-            className="text-charcoal-800 text-sm md:text-lg font-medium leading-relaxed border-l-2 border-champagne-500 pl-6"
-          >
-            Tong Studio is a creative space for podcast recording, photoshoots, and content creation. Professional setups, flexible booking, and a team that helps you bring your vision to life.
-          </motion.p>
         </div>
       </div>
-
-      {/* Footer of Hero */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.1, duration: 0.5 }}
-        className="absolute bottom-12 w-full px-6 md:px-20 flex justify-between items-end text-charcoal-900 text-[10px] uppercase tracking-widest z-20"
-      >
-        <div className="flex gap-8 font-bold">
-          <span>Podcast</span>
-          <span>Photoshoot</span>
-          <span>Events</span>
-        </div>
-        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-           <div className="w-[1px] h-12 bg-charcoal-900"></div>
-           <span>Explore</span>
-        </div>
-        <div className="font-bold">Book a Session</div>
-      </motion.div>
     </div>
   );
 };
