@@ -84,27 +84,36 @@ const Hero: React.FC = () => {
     if (p >= 0.75) return "inset(0 0 100% 0)";
     return `inset(0 0 ${((p - 0.5) / 0.25) * 100}% 0)`;
   });
-  const clip3 = useTransform(smoothProgress, (p) => {
-    if (p <= 0.75) return "inset(0 0 0% 0)";
-    if (p >= 1) return "inset(0 0 100% 0)";
-    return `inset(0 0 ${((p - 0.75) / 0.25) * 100}% 0)`;
-  });
+  // Last slide: no clip – stay fully visible so we never reveal blank space underneath
+  const clip3 = useTransform(smoothProgress, () => "inset(0 0 0% 0)");
 
   const clipPaths = [clip0, clip1, clip2, clip3];
   const SLIDE_COUNT = SLIDES.length;
 
-  // Incoming: zoom in (0.96→1); outgoing: zoom out (1→0.96) over each segment
-  const scaleInOut = (p: number, start: number, end: number) => {
-    if (p <= start) return 0.96;
-    if (p >= end) return 0.96;
-    const t = (p - start) / (end - start);
-    if (t <= 0.5) return 0.96 + (t / 0.5) * 0.04;
-    return 1 - ((t - 0.5) / 0.5) * 0.04;
-  };
-  const scale0 = useTransform(smoothProgress, (p) => scaleInOut(p, 0, 0.25));
-  const scale1 = useTransform(smoothProgress, (p) => scaleInOut(p, 0.25, 0.5));
-  const scale2 = useTransform(smoothProgress, (p) => scaleInOut(p, 0.5, 0.75));
-  const scale3 = useTransform(smoothProgress, (p) => scaleInOut(p, 0.75, 1));
+  // Outgoing slide zooms out (1→0.92); incoming slide zooms in (0.9→1) – both over the same scroll segment
+  const scale0 = useTransform(smoothProgress, (p) => {
+    if (p <= 0) return 1;
+    if (p >= 0.25) return 0.92;
+    return 1 - (p / 0.25) * 0.08; // outgoing in [0, 0.25]
+  });
+  const scale1 = useTransform(smoothProgress, (p) => {
+    if (p <= 0) return 0.9;
+    if (p <= 0.25) return 0.9 + (p / 0.25) * 0.1;   // incoming [0, 0.25]
+    if (p >= 0.5) return 0.92;
+    return 1 - ((p - 0.25) / 0.25) * 0.08;           // outgoing [0.25, 0.5]
+  });
+  const scale2 = useTransform(smoothProgress, (p) => {
+    if (p <= 0.25) return 0.9;
+    if (p <= 0.5) return 0.9 + ((p - 0.25) / 0.25) * 0.1;
+    if (p >= 0.75) return 0.92;
+    return 1 - ((p - 0.5) / 0.25) * 0.08;
+  });
+  // Last slide: zoom in when incoming [0.5, 0.75], then stay at 1 (no zoom out – no next slide)
+  const scale3 = useTransform(smoothProgress, (p) => {
+    if (p <= 0.5) return 0.9;
+    if (p <= 0.75) return 0.9 + ((p - 0.5) / 0.25) * 0.1;
+    return 1;
+  });
   const bgScales = [scale0, scale1, scale2, scale3];
 
   // Only the current segment's text is visible – prevents overlap (no clip boundary bleed)
@@ -115,9 +124,9 @@ const Hero: React.FC = () => {
   const textVisibility = [visible0, visible1, visible2, visible3];
 
   return (
-    <div ref={containerRef} className="relative h-[400vh] bg-alabaster">
+    <div ref={containerRef} className="relative h-[400vh] bg-black -mb-[1px]">
       {/* Sticky frame: whole screen sticks; only backgrounds inside animate with scroll */}
-      <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden bg-black min-h-0">
         {/* Background layers: clip-path reveal + zoom in as you scroll through each segment */}
         {SLIDES.map((slide, i) => (
           <motion.div
@@ -137,7 +146,9 @@ const Hero: React.FC = () => {
             <motion.div
               style={{
                 position: "absolute",
-                inset: 0,
+                inset: "-10%",
+                width: "120%",
+                height: "120%",
                 scale: bgScales[i],
                 willChange: "transform",
                 transformOrigin: "center center",
@@ -147,7 +158,7 @@ const Hero: React.FC = () => {
               <img
                 src={slide.bg}
                 alt=""
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
                 style={{
                   willChange: "transform",
                   transform: "translateZ(0)",
