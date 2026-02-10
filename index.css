@@ -54,6 +54,18 @@ body {
   color: #1A1A1A;
 }
 
+#navbar-portal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  pointer-events: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 .grain-overlay {
   position: fixed;
   top: 0;

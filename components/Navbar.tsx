@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Menu, X, Globe, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -23,6 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const closeContact = onCloseContact ?? (() => setInternalContactOpen(false));
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPastHero, setIsPastHero] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleNavClick = (sectionId: string) => {
@@ -33,34 +35,49 @@ const Navbar: React.FC<NavbarProps> = ({
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      // White until we reach the stats section; switch to black as soon as it enters view
+      const statsSection = document.getElementById('stats-section');
+      const rect = statsSection?.getBoundingClientRect();
+      setIsPastHero(rect ? rect.top <= 0 : window.scrollY >= window.innerHeight);
     };
+    handleScroll(); // set initial state
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return (
-    <nav className="fixed w-full z-50 py-6 px-6 md:px-12 pointer-events-none text-charcoal-900">
-      <div className="relative flex justify-between items-start">
-        {/* Logo - black text so it shows on hero */}
-        <div className="pointer-events-auto">
+  const navContent = (
+    <nav
+      className="w-full py-6 px-6 md:px-12 pointer-events-none"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 10000,
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+      }}
+    >
+      <div className="relative flex justify-between items-center min-h-[48px]">
+        {/* Logo: white on hero, black past hero */}
+        <div className="pointer-events-auto flex items-center">
            <div
-            className="font-serif text-2xl font-bold tracking-wide cursor-pointer text-black hover:text-charcoal-800 transition-colors"
+            className={`font-serif text-2xl font-bold tracking-wide cursor-pointer transition-colors ${isPastHero ? 'text-charcoal-900 hover:text-charcoal-800' : 'text-white hover:text-white/90'}`}
             onClick={onNavigateHome}
           >
             TONG STUDIO
           </div>
         </div>
 
-        {/* Desktop Menu - Floating Pill: centered in viewport, appears when you scroll past hero */}
+        {/* Desktop Menu - Floating Pill: centered, same line as logo and icons */}
         <motion.div
           initial={false}
           animate={{
             opacity: isScrolled ? 1 : 0,
-            y: isScrolled ? 0 : -8,
             pointerEvents: isScrolled ? 'auto' : 'none',
           }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="hidden md:flex items-center gap-8 px-8 py-4 rounded-full border bg-white/90 backdrop-blur-md border-stone-200 shadow-sm absolute left-1/2 top-0 -translate-x-1/2"
+          className="hidden md:flex items-center gap-8 px-8 py-4 rounded-full border bg-white/90 backdrop-blur-md border-stone-200 shadow-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         >
           <button type="button" onClick={() => handleNavClick('spaces')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Spaces</button>
           <button type="button" onClick={() => handleNavClick('about')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">About</button>
@@ -68,23 +85,23 @@ const Navbar: React.FC<NavbarProps> = ({
           <button type="button" onClick={() => openContact()} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Contact</button>
         </motion.div>
 
-        {/* Right Actions - black text so they show on hero */}
-        <div className="hidden md:flex pointer-events-auto items-center gap-6 text-black hover:text-charcoal-800 transition-colors">
-           <button type="button" className="flex items-center gap-2 text-xs uppercase tracking-widest hover:text-champagne-600 transition-colors font-medium">
+        {/* Right Actions: white on hero, black past hero */}
+        <div className={`hidden md:flex pointer-events-auto items-center gap-6 transition-colors shrink-0 ${isPastHero ? 'text-charcoal-900 hover:text-charcoal-800' : 'text-white hover:text-white/90'}`}>
+           <button type="button" className={`flex items-center gap-2 text-xs uppercase tracking-widest font-medium transition-colors ${isPastHero ? 'hover:text-champagne-600' : 'hover:text-champagne-300'}`}>
               <Globe size={14} /> EN
            </button>
            <button
              type="button"
              onClick={() => openContact()}
-             className="hover:text-champagne-600 transition-colors"
+             className={`transition-colors ${isPastHero ? 'hover:text-champagne-600' : 'hover:text-champagne-300'}`}
              aria-label="Open contact form"
            >
               <MessageCircle size={18} />
            </button>
         </div>
 
-        {/* Mobile Toggle - black text so it shows on hero */}
-        <div className="md:hidden pointer-events-auto text-black">
+        {/* Mobile Toggle: white on hero, black past hero */}
+        <div className={`md:hidden pointer-events-auto flex items-center transition-colors ${isPastHero ? 'text-charcoal-900' : 'text-white'}`}>
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X /> : <Menu />}
           </button>
@@ -111,6 +128,9 @@ const Navbar: React.FC<NavbarProps> = ({
       </AnimatePresence>
     </nav>
   );
+
+  const portalTarget = typeof document !== 'undefined' ? document.getElementById('navbar-portal') : null;
+  return portalTarget ? createPortal(navContent, portalTarget) : null;
 };
 
 export default Navbar;

@@ -14,6 +14,7 @@ import PropertyShowcase from './components/PropertyShowcase';
 import FlipWords from './components/FlipWords';
 import AppleScrollSection from './components/AppleScrollSection';
 import ImageTextGrid from './components/ImageTextGrid';
+import TetraBlockGrid from './components/TetraBlockGrid';
 import AnimGrid from './components/AnimGrid';
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
             <AppleScrollSection />
             <FlipWords />
             <ImageTextGrid />
+            <TetraBlockGrid />
             <AnimGrid />
             <Journal />
             <LifestyleSection />

@@ -228,7 +228,12 @@ const Hero: React.FC = () => {
                     <span key={j}>{item}</span>
                   ))}
                 </div>
-                <div className="font-bold text-champagne-200">Book a Session</div>
+                <button
+                  type="button"
+                  className="rounded-full bg-white text-charcoal-900 px-5 py-2.5 text-xs uppercase tracking-widest font-bold hover:bg-white/90 transition-colors shadow-sm pointer-events-auto"
+                >
+                  Book a Session
+                </button>
               </motion.div>
             ))}
             <div
