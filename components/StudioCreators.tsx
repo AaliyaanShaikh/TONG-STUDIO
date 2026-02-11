@@ -60,7 +60,7 @@ const StudioCreators: React.FC = () => {
   };
 
   return (
-    <section className="bg-charcoal-950 mt-0 mb-24 md:mb-32 py-12 md:py-16 overflow-hidden">
+    <section id="creators" className="bg-charcoal-950 mt-0 mb-24 md:mb-32 py-12 md:py-16 overflow-hidden">
       <div className="w-full px-6 md:px-24">
         <div className="mb-12 md:mb-16">
           <div className="h-px w-full bg-white/25 mt-6 md:mt-8 mb-8 md:mb-10" />

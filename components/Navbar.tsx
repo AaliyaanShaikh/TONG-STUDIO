@@ -16,8 +16,10 @@ const Navbar: React.FC<NavbarProps> = ({
   const openContact = onOpenContact ?? (() => {});
 
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isPastHero, setIsPastHero] = useState(false);
+  const [isOverDarkBackground, setIsOverDarkBackground] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const DARK_SECTION_IDS = ['hero', 'creators', 'contact'];
 
   const handleNavClick = (sectionId: string) => {
     onNavigateToSection?.(sectionId);
@@ -27,9 +29,19 @@ const Navbar: React.FC<NavbarProps> = ({
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      const statsSection = document.getElementById('stats-section');
-      const rect = statsSection?.getBoundingClientRect();
-      setIsPastHero(rect ? rect.top <= 0 : window.scrollY >= window.innerHeight);
+      // Navbar sits in top ~100px; check if any dark section overlaps that area
+      const navbarBottom = 100;
+      let overDark = false;
+      for (const id of DARK_SECTION_IDS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < navbarBottom && rect.bottom > 0) {
+          overDark = true;
+          break;
+        }
+      }
+      setIsOverDarkBackground(overDark);
     };
     handleScroll();
     window.addEventListener('scroll', handleScroll);
@@ -39,10 +51,10 @@ const Navbar: React.FC<NavbarProps> = ({
   return (
     <nav className="fixed inset-x-0 top-0 z-[10000] py-6 px-6 md:px-12 pointer-events-none">
       <div className="flex justify-between items-center min-h-[48px]">
-        {/* Logo: white on hero, black past hero */}
+        {/* Logo: white over dark sections, charcoal over light */}
         <div className="pointer-events-auto">
           <div
-            className={`font-serif text-2xl font-bold tracking-wide cursor-pointer transition-colors ${isPastHero ? 'text-charcoal-900 hover:text-charcoal-800' : 'text-white hover:text-white/90'}`}
+            className={`font-serif text-2xl font-bold tracking-wide cursor-pointer transition-colors ${isOverDarkBackground ? 'text-white hover:text-white/90' : 'text-charcoal-900 hover:text-charcoal-800'}`}
             onClick={onNavigateHome}
           >
             TONG STUDIO
@@ -66,23 +78,23 @@ const Navbar: React.FC<NavbarProps> = ({
           <button type="button" onClick={() => openContact()} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Contact</button>
         </motion.div>
 
-        {/* Right Actions */}
-        <div className={`hidden md:flex pointer-events-auto items-center gap-6 transition-colors ${isPastHero ? 'text-charcoal-900 hover:text-charcoal-800' : 'text-white hover:text-white/90'}`}>
-          <button type="button" className={`flex items-center gap-2 text-xs uppercase tracking-widest font-medium transition-colors ${isPastHero ? 'hover:text-champagne-600' : 'hover:text-champagne-300'}`}>
+        {/* Right Actions: white over dark, charcoal over light */}
+        <div className={`hidden md:flex pointer-events-auto items-center gap-6 transition-colors ${isOverDarkBackground ? 'text-white hover:text-white/90' : 'text-charcoal-900 hover:text-charcoal-800'}`}>
+          <button type="button" className={`flex items-center gap-2 text-xs uppercase tracking-widest font-medium transition-colors ${isOverDarkBackground ? 'hover:text-champagne-300' : 'hover:text-champagne-600'}`}>
             <Globe size={14} /> EN
           </button>
           <button
             type="button"
             onClick={() => openContact()}
-            className={`transition-colors ${isPastHero ? 'hover:text-champagne-600' : 'hover:text-champagne-300'}`}
+            className={`transition-colors ${isOverDarkBackground ? 'hover:text-champagne-300' : 'hover:text-champagne-600'}`}
             aria-label="Open contact form"
           >
             <MessageCircle size={18} />
           </button>
         </div>
 
-        {/* Mobile Toggle */}
-        <div className={`md:hidden pointer-events-auto transition-colors ${isPastHero ? 'text-charcoal-900' : 'text-white'}`}>
+        {/* Mobile Toggle: white over dark, charcoal over light */}
+        <div className={`md:hidden pointer-events-auto transition-colors ${isOverDarkBackground ? 'text-white' : 'text-charcoal-900'}`}>
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X /> : <Menu />}
           </button>

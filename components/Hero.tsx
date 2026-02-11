@@ -124,7 +124,7 @@ const Hero: React.FC = () => {
   const textVisibility = [visible0, visible1, visible2, visible3];
 
   return (
-    <div ref={containerRef} className="relative h-[400vh] bg-black -mb-[1px]">
+    <div id="hero" ref={containerRef} className="relative h-[400vh] bg-black -mb-[1px]">
       {/* Sticky frame: whole screen sticks; only backgrounds inside animate with scroll */}
       <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden bg-black min-h-0">
         {/* Background layers: clip-path reveal + zoom in as you scroll through each segment */}
