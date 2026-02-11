@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import Preloader from './components/Preloader';
 import Philosophy from './components/Philosophy';
 import { motion, AnimatePresence } from 'framer-motion';
-import PropertyShowcase from './components/PropertyShowcase';
+import StudioShowcase from './components/StudioShowcase';
 import FlipWords from './components/FlipWords';
 import AppleScrollSection from './components/AppleScrollSection';
 import ImageTextGrid from './components/ImageTextGrid';
@@ -28,8 +28,6 @@ function App() {
   const handleNavigateToSection = (sectionId: string) => {
     setScrollToSectionId(sectionId);
   };
-
-  const handlePropertySelect = () => {};
 
   useEffect(() => {
     if (!scrollToSectionId) return;
@@ -61,7 +59,7 @@ function App() {
             <Hero />
             <StatsSection />
             <Philosophy />
-            <PropertyShowcase onPropertySelect={handlePropertySelect} />
+            <StudioShowcase />
             <AppleScrollSection />
             <FlipWords />
             <ImageTextGrid />

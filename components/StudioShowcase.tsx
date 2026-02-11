@@ -1,14 +1,9 @@
 import React, { useRef } from 'react';
-import { Property } from '../types';
-import { FEATURED_PROPERTIES } from '../constants/FeaturedConstants';
+import { FEATURED_STUDIOS } from '../constants/FeaturedConstants';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
-interface PropertyShowcaseProps {
-  onPropertySelect: (property: Property) => void;
-}
-
-const PropertyShowcase: React.FC<PropertyShowcaseProps> = ({ onPropertySelect }) => {
+const StudioShowcase: React.FC = () => {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -19,15 +14,12 @@ const PropertyShowcase: React.FC<PropertyShowcaseProps> = ({ onPropertySelect })
   return (
     <section id="spaces" ref={targetRef} className="relative h-[400vh] bg-white text-charcoal-900">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        
-        {/* Section Header - below navbar, content starts underneath it */}
         <div className="absolute top-24 left-6 md:left-24 z-10 pointer-events-none">
           <span className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-2 block">Our Spaces</span>
           <h2 className="font-serif text-3xl md:text-4xl text-charcoal-900">Studio & Sets</h2>
         </div>
 
         <motion.div style={{ x }} className="flex gap-20 px-6 md:px-24 items-center pt-32">
-          {/* Intro Card */}
           <div className="flex-shrink-0 w-[80vw] md:w-[25vw] flex flex-col justify-center">
             <h3 className="font-serif text-6xl md:text-8xl leading-[0.9] mb-12 text-charcoal-900">
               Built <br /> for <span className="italic text-stone-400">Creators</span>
@@ -36,55 +28,49 @@ const PropertyShowcase: React.FC<PropertyShowcaseProps> = ({ onPropertySelect })
               Podcast booths, photo sets, and versatile spaces for every kind of project. Professional gear, flexible booking, and a team that helps you get the best result.
             </p>
             <div className="flex items-center gap-4 text-xs uppercase tracking-widest text-champagne-600 font-bold">
-               <div className="h-[2px] w-12 bg-champagne-600"></div>
-               <span>Swipe to View</span>
+              <div className="h-[2px] w-12 bg-champagne-600" />
+              <span>Swipe to View</span>
             </div>
           </div>
 
-          {/* Space Cards */}
-          {FEATURED_PROPERTIES.map((prop, index) => (
-            <div 
-              key={prop.id} 
+          {FEATURED_STUDIOS.map((studio, index) => (
+            <div
+              key={studio.id}
               className="group relative flex-shrink-0 w-[85vw] md:w-[50vw] h-[70vh] cursor-pointer"
-              onClick={() => onPropertySelect(prop)}
             >
               <div className="w-full h-full overflow-hidden relative bg-stone-100 shadow-xl">
                 <motion.img
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
-                  src={prop.imageUrl} 
-                  alt={prop.title}
+                  src={studio.imageUrl}
+                  alt={studio.title}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
-                
-                {/* Index Number */}
                 <div className="absolute top-0 right-0 p-8 text-8xl font-serif text-white/40 font-bold z-10">
-                   0{index + 1}
+                  0{index + 1}
                 </div>
               </div>
-              
               <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 bg-white/90 backdrop-blur-sm transform translate-y-1/2 group-hover:translate-y-0 transition-transform duration-500">
                 <div className="flex justify-between items-end">
-                    <div>
-                      <h4 className="font-serif text-4xl md:text-5xl text-charcoal-900 mb-2">
-                        {prop.title}
-                      </h4>
-                      <p className="text-sm uppercase tracking-widest text-stone-500 mb-4 font-bold">{prop.location}</p>
-                      <div className="flex gap-4 text-charcoal-800 text-xs tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
-                        <span>Capacity {prop.beds}</span>
-                        <span className="w-px h-3 bg-stone-300"></span>
-                        <span>{prop.sqft.toLocaleString()} Sq Ft</span>
-                      </div>
+                  <div>
+                    <h4 className="font-serif text-4xl md:text-5xl text-charcoal-900 mb-2">
+                      {studio.title}
+                    </h4>
+                    <p className="text-sm uppercase tracking-widest text-stone-500 mb-4 font-bold">{studio.location}</p>
+                    <div className="flex gap-4 text-charcoal-800 text-xs tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
+                      <span>Capacity {studio.capacity}</span>
+                      <span className="w-px h-3 bg-stone-300" />
+                      <span>{studio.sqft.toLocaleString()} Sq Ft</span>
                     </div>
-                    <div className="text-2xl font-serif italic text-champagne-600">
-                      {prop.price}
-                    </div>
+                  </div>
+                  <div className="text-2xl font-serif italic text-champagne-600">
+                    {studio.price}
+                  </div>
                 </div>
               </div>
             </div>
           ))}
 
-          {/* End Card - scrolls to contact */}
           <button
             type="button"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
@@ -101,4 +87,4 @@ const PropertyShowcase: React.FC<PropertyShowcaseProps> = ({ onPropertySelect })
   );
 };
 
-export default PropertyShowcase;
+export default StudioShowcase;
