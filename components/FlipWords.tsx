@@ -15,7 +15,7 @@ const FlipWords: React.FC = () => {
   }, []);
 
   return (
-    <section className="pt-36 pb-14 md:pt-52 md:pb-20 bg-white overflow-hidden">
+    <section className="pt-36 pb-0 md:pt-52 bg-white overflow-hidden">
       <div className="container mx-auto px-6 w-full flex justify-center">
         <div className="font-serif text-4xl md:text-6xl lg:text-7xl text-charcoal-900 leading-tight tracking-tight flex flex-wrap items-center justify-start gap-x-2 text-left">
           {/* Fixed text – never moves */}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StatsSection from './components/StatsSection';
-import LifestyleSection from './components/LifestyleSection';
+import ServicesSection from './components/ServicesSection';
 import Journal from './components/Journal';
 import GlobalLocations from './components/GlobalLocations';
 import CallToAction from './components/CallToAction';
@@ -14,8 +14,7 @@ import PropertyShowcase from './components/PropertyShowcase';
 import FlipWords from './components/FlipWords';
 import AppleScrollSection from './components/AppleScrollSection';
 import ImageTextGrid from './components/ImageTextGrid';
-import TetraBlockGrid from './components/TetraBlockGrid';
-import AnimGrid from './components/AnimGrid';
+import StudioCreators from './components/StudioCreators';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -66,10 +65,9 @@ function App() {
             <AppleScrollSection />
             <FlipWords />
             <ImageTextGrid />
-            <TetraBlockGrid />
-            <AnimGrid />
+            <StudioCreators />
             <Journal />
-            <LifestyleSection />
+            <ServicesSection />
             <GlobalLocations />
             <CallToAction />
           </motion.div>
