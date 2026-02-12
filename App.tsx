@@ -15,6 +15,8 @@ import FlipWords from './components/FlipWords';
 import AppleScrollSection from './components/AppleScrollSection';
 import ImageTextGrid from './components/ImageTextGrid';
 import StudioCreators from './components/StudioCreators';
+import CinematicGrid from './components/CinematicGrid.tsx';
+import PodcastShowcase from './components/PodcastShowcase';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -64,6 +66,8 @@ function App() {
             <FlipWords />
             <ImageTextGrid />
             <StudioCreators />
+            <PodcastShowcase />
+            <CinematicGrid />
             <Journal />
             <ServicesSection />
             <GlobalLocations />
