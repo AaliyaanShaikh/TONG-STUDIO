@@ -176,10 +176,6 @@
     height: calc(5 * var(--row-height) + 48px);
   }
 
-  .grid-item.square {
-    /* 1 row */
-  }
-
   .grid-item.tall {
     grid-row: span 2;
   }
