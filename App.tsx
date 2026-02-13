@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StatsSection from './components/StatsSection';
 import ServicesSection from './components/ServicesSection';
-import Journal from './components/Journal';
+import StudioNotes from './components/StudioNotes';
 import GlobalLocations from './components/GlobalLocations';
 import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
@@ -68,7 +68,7 @@ function App() {
             <StudioCreators />
             <PodcastShowcase />
             <CinematicGrid />
-            <Journal />
+            <StudioNotes />
             <ServicesSection />
             <GlobalLocations />
             <CallToAction />

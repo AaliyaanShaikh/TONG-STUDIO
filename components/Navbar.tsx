@@ -19,7 +19,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const [isOverDarkBackground, setIsOverDarkBackground] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const DARK_SECTION_IDS = ['hero', 'creators', 'contact'];
+  const DARK_SECTION_IDS = ['hero', 'creators', 'journal', 'services', 'contact'];
 
   const handleNavClick = (sectionId: string) => {
     onNavigateToSection?.(sectionId);
