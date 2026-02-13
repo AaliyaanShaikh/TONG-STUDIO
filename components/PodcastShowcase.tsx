@@ -40,14 +40,14 @@ const PodcastShowcase: React.FC = () => {
   };
 
   return (
-    <section className="bg-white pt-40 md:pt-48 pb-32 md:pb-40 overflow-hidden">
+    <section className="bg-white pt-24 sm:pt-40 md:pt-48 pb-20 sm:pb-32 md:pb-40 overflow-hidden">
       <div className="relative w-full">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center font-sans text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal-900 mb-12 md:mb-16 tracking-tight px-4 md:px-6"
+          className="text-center font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-charcoal-900 mb-12 md:mb-16 tracking-tight px-4 md:px-6"
         >
           Created in our podcast studios
         </motion.h2>
@@ -56,7 +56,7 @@ const PodcastShowcase: React.FC = () => {
           <button
             type="button"
             onClick={() => scroll('left')}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full bg-white border border-stone-200 shadow-xl flex items-center justify-center text-charcoal-900 hover:bg-stone-50 transition-colors md:left-4"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white border border-stone-200 shadow-xl flex items-center justify-center text-charcoal-900 hover:bg-stone-50 active:bg-stone-100 transition-colors md:left-4 touch-manipulation"
             aria-label="Scroll left"
           >
             <ChevronLeft size={28} />
@@ -65,7 +65,7 @@ const PodcastShowcase: React.FC = () => {
           <button
             type="button"
             onClick={() => scroll('right')}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full bg-white border border-stone-200 shadow-xl flex items-center justify-center text-charcoal-900 hover:bg-stone-50 transition-colors md:right-4"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white border border-stone-200 shadow-xl flex items-center justify-center text-charcoal-900 hover:bg-stone-50 active:bg-stone-100 transition-colors md:right-4 touch-manipulation"
             aria-label="Scroll right"
           >
             <ChevronRight size={28} />
@@ -111,7 +111,7 @@ function EpisodeCard({
           />
           <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 pt-20">
-            <h3 className="font-sans font-bold text-white text-xl md:text-2xl lg:text-3xl line-clamp-2 mb-2">
+            <h3 className="font-serif font-bold text-white text-lg md:text-xl lg:text-2xl line-clamp-2 mb-2">
               {episode.title}
             </h3>
             <p className="text-white/95 text-sm md:text-base font-medium">

@@ -48,24 +48,24 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
 
   return (
     <section id="services" className="bg-[#0d0d0d]">
-      <div className="max-w-6xl mx-auto px-6 md:px-10 pt-24 md:pt-28 pb-0">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 pt-6 sm:pt-8 md:pt-12 pb-0">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mb-10 md:mb-12"
         >
-          <h2 className="font-serif text-4xl md:text-5xl text-white tracking-tight">
+          <h2 className="font-sans text-2xl sm:text-3xl md:text-4xl text-white tracking-tight font-semibold">
             What We Offer
           </h2>
-          <p className="mt-3 text-stone-400 font-medium max-w-md">
+          <p className="font-sans mt-3 text-stone-400 font-medium max-w-md">
             Podcast studios, photoshoots, video production, and events — all under one roof.
           </p>
         </motion.div>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 md:px-10 pb-8">
-        <div className="h-[70vh] min-h-[420px] flex flex-col md:flex-row gap-3 overflow-hidden rounded-2xl">
+        <div className="h-[70vh] min-h-[320px] sm:min-h-[420px] flex flex-col md:flex-row gap-3 overflow-hidden rounded-2xl">
           {items.map((item, i) => (
             <motion.div
               key={i}
@@ -105,9 +105,16 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </motion.span>
               </div>
 
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 px-2 opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none">
+              {/* Mobile: horizontal text on left */}
+              <div className="absolute left-5 sm:left-6 top-1/2 -translate-y-1/2 z-10 pr-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none md:hidden">
+                <h3 className="font-sans text-white/90 text-sm sm:text-base font-bold tracking-widest whitespace-nowrap">
+                  {item.title}
+                </h3>
+              </div>
+              {/* Desktop: original vertical text centered at bottom */}
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 px-2 opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none hidden md:block">
                 <h3
-                  className="text-white/90 text-base md:text-xl font-bold tracking-widest"
+                  className="font-sans text-white/90 text-base md:text-xl font-bold tracking-widest"
                   style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}
                 >
                   {item.title}
@@ -127,10 +134,10 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
                   ease: [0.32, 0.72, 0, 1],
                 }}
               >
-                <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-3">
+                <h2 className="font-sans text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2 md:mb-3">
                   {item.title}
                 </h2>
-                <p className="text-stone-400 max-w-sm text-sm md:text-base leading-relaxed">
+                <p className="font-sans text-stone-400 max-w-sm text-sm md:text-base leading-relaxed">
                   {item.description ??
                     descriptionTemplate.replace("{title}", item.title.toLowerCase())}
                 </p>

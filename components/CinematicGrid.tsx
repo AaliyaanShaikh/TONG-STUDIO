@@ -27,7 +27,11 @@ function GridContent({ loaded }: { loaded: boolean }) {
   );
 }
 
-export default function CinematicGrid() {
+interface CinematicGridProps {
+  onOpenBooking?: () => void;
+}
+
+export default function CinematicGrid({ onOpenBooking }: CinematicGridProps) {
   const [loaded, setLoaded] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
@@ -97,9 +101,13 @@ export default function CinematicGrid() {
           >
             <h3 className="cinematic-cta-title">Ready to get started?</h3>
             <p className="cinematic-cta-price">Starting from INR 5,000</p>
-            <a href="#contact" className="cinematic-cta">
+            <button
+              type="button"
+              onClick={() => onOpenBooking?.()}
+              className="cinematic-cta bg-transparent cursor-pointer"
+            >
               Book a studio
-            </a>
+            </button>
           </div>
         </div>
       </div>

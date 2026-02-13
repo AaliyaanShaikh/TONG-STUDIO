@@ -7,9 +7,8 @@ export const FEATURED_STUDIOS: StudioSpace[] = [
     price: 'From $120/hr',
     location: 'Main Booth',
     capacity: 4,
-    baths: 0,
     sqft: 320,
-    imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: '/67c831063b63647b70a176ce_Nest%205.webp',
     description: '',
     features: ['Sound-treated', 'Pro mics', 'Multi-track']
   },
@@ -20,7 +19,7 @@ export const FEATURED_STUDIOS: StudioSpace[] = [
     location: 'Cyclo & Sets',
     capacity: 6,
     sqft: 800,
-    imageUrl: 'https://images.unsplash.com/photo-1545235617-7a424c1a60cc?q=80&w=2071&auto=format&fit=crop',
+    imageUrl: '/67c831063b63647b70a176cd_Exec%202.webp',
     description: '',
     features: ['Cyclorama', 'Natural light', 'Backdrops']
   },
@@ -31,7 +30,7 @@ export const FEATURED_STUDIOS: StudioSpace[] = [
     location: 'Full Production',
     capacity: 8,
     sqft: 1200,
-    imageUrl: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2053&auto=format&fit=crop',
+    imageUrl: '/67c831063b63647b70a176cc_Apex%201.webp',
     description: '',
     features: ['Green screen', 'Lighting grid', 'Edit bay']
   },
@@ -42,7 +41,7 @@ export const FEATURED_STUDIOS: StudioSpace[] = [
     location: 'Flex Space',
     capacity: 20,
     sqft: 2000,
-    imageUrl: 'https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: '/67c831063b63647b70a17704_Cove%203.webp',
     description: '',
     features: ['AV setup', 'Seating', 'Catering ready']
   },

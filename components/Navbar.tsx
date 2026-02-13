@@ -5,15 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface NavbarProps {
   onNavigateHome: () => void;
   onNavigateToSection?: (sectionId: string) => void;
-  onOpenContact?: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
   onNavigateHome,
   onNavigateToSection,
-  onOpenContact,
 }) => {
-  const openContact = onOpenContact ?? (() => {});
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOverDarkBackground, setIsOverDarkBackground] = useState(true);
@@ -49,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-[10000] py-6 px-6 md:px-12 pointer-events-none">
+    <nav className="fixed inset-x-0 top-0 z-[10000] pt-[max(2.5rem,env(safe-area-inset-top))] pb-8 md:pt-[max(1.5rem,env(safe-area-inset-top))] md:pb-6 px-4 sm:px-6 md:px-12 pointer-events-none">
       <div className="flex justify-between items-center min-h-[48px]">
         {/* Logo: white over dark sections, charcoal over light */}
         <div className="pointer-events-auto">
@@ -74,8 +71,11 @@ const Navbar: React.FC<NavbarProps> = ({
         >
           <button type="button" onClick={() => handleNavClick('spaces')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Spaces</button>
           <button type="button" onClick={() => handleNavClick('about')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">About</button>
-          <button type="button" onClick={() => handleNavClick('journal')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Journal</button>
-          <button type="button" onClick={() => openContact()} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Contact</button>
+          <button type="button" onClick={() => handleNavClick('creators')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Creators</button>
+          <button type="button" onClick={() => handleNavClick('journal')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Studio Notes</button>
+          <button type="button" onClick={() => handleNavClick('services')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Services</button>
+          <button type="button" onClick={() => handleNavClick('pricing')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Pricing</button>
+          <button type="button" onClick={() => handleNavClick('contact')} className="text-xs uppercase tracking-widest text-charcoal-900 hover:text-champagne-600 transition-colors font-medium">Contact</button>
         </motion.div>
 
         {/* Right Actions: white over dark, charcoal over light */}
@@ -85,9 +85,9 @@ const Navbar: React.FC<NavbarProps> = ({
           </button>
           <button
             type="button"
-            onClick={() => openContact()}
+            onClick={() => handleNavClick('contact')}
             className={`transition-colors ${isOverDarkBackground ? 'hover:text-champagne-300' : 'hover:text-champagne-600'}`}
-            aria-label="Open contact form"
+            aria-label="Scroll to contact"
           >
             <MessageCircle size={18} />
           </button>
@@ -108,13 +108,26 @@ const Navbar: React.FC<NavbarProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-white z-40 pointer-events-auto flex items-center justify-center"
+            className="fixed inset-0 bg-white z-40 pointer-events-auto flex flex-col"
           >
-            <div className="flex flex-col space-y-8 text-center">
+            <div className="flex justify-end p-4 pt-[max(1.5rem,env(safe-area-inset-top))] pb-2">
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 -m-2 text-charcoal-900 hover:text-champagne-600 transition-colors touch-manipulation"
+                aria-label="Close menu"
+              >
+                <X size={24} strokeWidth={2} />
+              </button>
+            </div>
+            <div className="flex flex-1 flex-col justify-center space-y-8 text-center">
               <button type="button" onClick={() => handleNavClick('spaces')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Spaces</button>
               <button type="button" onClick={() => handleNavClick('about')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">About</button>
-              <button type="button" onClick={() => handleNavClick('journal')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Journal</button>
-              <button type="button" onClick={() => { openContact(); setIsMobileMenuOpen(false); }} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Contact</button>
+              <button type="button" onClick={() => handleNavClick('creators')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Creators</button>
+              <button type="button" onClick={() => handleNavClick('journal')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Studio Notes</button>
+              <button type="button" onClick={() => handleNavClick('services')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Services</button>
+              <button type="button" onClick={() => handleNavClick('pricing')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Pricing</button>
+              <button type="button" onClick={() => handleNavClick('contact')} className="font-serif text-3xl text-charcoal-900 hover:text-champagne-500">Contact</button>
             </div>
           </motion.div>
         )}

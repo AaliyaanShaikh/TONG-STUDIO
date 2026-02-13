@@ -14,7 +14,7 @@ const Preloader: React.FC = () => {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
-          className="font-serif text-4xl md:text-6xl tracking-tight text-charcoal-900"
+          className="font-serif text-3xl sm:text-4xl md:text-6xl tracking-tight text-charcoal-900"
         >
           TONG STUDIO
         </motion.div>

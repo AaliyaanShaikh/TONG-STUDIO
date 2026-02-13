@@ -1,0 +1,9 @@
+# TONG STUDIO - Font Consistency
+
+## Font system (defined in index.css)
+- **font-serif** (Cormorant Garamond): Section titles, main headings, card/article titles
+- **font-sans** (Montserrat): Taglines, subsections, body text, labels, descriptions, buttons
+
+## Usage
+- Use `font-serif` for: h1, h2, section headings, card titles, logo, CTA headlines
+- Use `font-sans` for: taglines ("You've seen our studios everywhere"), body paragraphs, labels (uppercase tracking), descriptions, nav links

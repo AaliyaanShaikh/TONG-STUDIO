@@ -15,13 +15,13 @@ const FlipWords: React.FC = () => {
   }, []);
 
   return (
-    <section className="pt-36 pb-0 md:pt-52 bg-white overflow-hidden">
-      <div className="container mx-auto px-6 w-full flex justify-center">
-        <div className="font-serif text-4xl md:text-6xl lg:text-7xl text-charcoal-900 leading-tight tracking-tight flex flex-wrap items-center justify-start gap-x-2 text-left">
+    <section className="pt-24 sm:pt-36 pb-0 md:pt-52 bg-white overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 w-full flex justify-center">
+        <div className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-charcoal-900 leading-tight tracking-tight flex flex-wrap items-center justify-start gap-x-2 text-left">
           {/* Fixed text – never moves */}
           <span className="inline-block shrink-0">We help you create</span>
           {/* Scroll word container – word scrolls up into view, left-aligned */}
-          <span className="relative inline-flex overflow-hidden align-middle h-[1.15em] min-w-[240px] md:min-w-[320px] lg:min-w-[400px] justify-start items-center">
+          <span className="relative inline-flex overflow-hidden align-middle h-[1.15em] min-w-[160px] sm:min-w-[240px] md:min-w-[320px] lg:min-w-[400px] justify-start items-center">
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={index}

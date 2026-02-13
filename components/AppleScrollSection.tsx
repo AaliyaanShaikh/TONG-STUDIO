@@ -80,7 +80,7 @@ export default function AppleScrollSection() {
         />
         <p
           ref={subRef}
-          className="text-charcoal-800 text-lg md:text-xl font-medium tracking-wide opacity-90"
+          className="font-sans text-charcoal-800 text-lg sm:text-xl md:text-2xl font-medium tracking-wide opacity-90"
         >
           Space to create. Room to record.
         </p>

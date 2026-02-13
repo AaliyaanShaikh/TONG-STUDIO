@@ -2,10 +2,10 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface CallToActionProps {
-  onOpenContact?: () => void;
+  onOpenBooking?: () => void;
 }
 
-const CallToAction: React.FC<CallToActionProps> = ({ onOpenContact }) => {
+const CallToAction: React.FC<CallToActionProps> = ({ onOpenBooking }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -25,12 +25,12 @@ const CallToAction: React.FC<CallToActionProps> = ({ onOpenContact }) => {
       />
       <div className="absolute inset-0 bg-charcoal-900/30 z-10" />
 
-      <div className="relative z-20 text-center text-white px-6 max-w-4xl">
+      <div className="relative z-20 text-center text-white px-4 sm:px-6 max-w-4xl">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="font-serif text-6xl md:text-8xl mb-8 text-white drop-shadow-md"
+          className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 sm:mb-8 text-white drop-shadow-md"
         >
           Begin Your <br />
           <span className="italic text-champagne-300">Journey</span>
@@ -39,16 +39,16 @@ const CallToAction: React.FC<CallToActionProps> = ({ onOpenContact }) => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-xl font-medium text-white mb-12 max-w-2xl mx-auto drop-shadow-sm"
+          className="font-sans text-sm sm:text-base md:text-lg font-medium text-white mb-8 sm:mb-12 max-w-2xl mx-auto drop-shadow-sm px-2"
         >
           Book a session for podcast, photoshoot, or your next project.
         </motion.p>
         <motion.button
           type="button"
-          onClick={() => onOpenContact?.()}
+          onClick={() => onOpenBooking?.()}
           whileHover={{ scale: 1.05, backgroundColor: '#FFFFFF', color: '#1A1A1A' }}
           whileTap={{ scale: 0.95 }}
-          className="border border-white text-white px-12 py-5 uppercase tracking-[0.2em] text-sm font-bold transition-all duration-300 backdrop-blur-sm hover:backdrop-blur-none"
+          className="border border-white text-white px-8 sm:px-12 py-4 sm:py-5 uppercase tracking-[0.2em] text-sm font-bold transition-all duration-300 backdrop-blur-sm hover:backdrop-blur-none touch-manipulation min-h-[48px]"
         >
           Book the Studio
         </motion.button>

@@ -10,9 +10,9 @@ const stats = [
 
 const StatsSection: React.FC = () => {
   return (
-    <div id="stats-section" className="bg-white text-charcoal-900 py-24 border-y border-stone-100">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center divide-x divide-stone-100">
+    <div id="stats-section" className="bg-white text-charcoal-900 py-12 sm:py-16 md:py-24 border-y border-stone-100">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-12 text-center divide-x divide-stone-100">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -20,10 +20,10 @@ const StatsSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.8 }}
-              className="px-4"
+              className="px-3 sm:px-4"
             >
-              <div className="font-serif text-4xl md:text-6xl text-charcoal-900 mb-4 font-medium">
-                {stat.value}<span className="text-champagne-500 text-3xl align-top">{stat.suffix}</span>
+              <div className="font-serif text-2xl sm:text-3xl md:text-4xl text-charcoal-900 mb-2 sm:mb-4 font-medium">
+                {stat.value}<span className="text-champagne-500 text-2xl sm:text-3xl align-top">{stat.suffix}</span>
               </div>
               <div className="text-stone-500 text-[10px] uppercase tracking-[0.3em] font-bold">
                 {stat.label}

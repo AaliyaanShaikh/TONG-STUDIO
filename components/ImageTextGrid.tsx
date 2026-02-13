@@ -54,36 +54,36 @@ function Card({
       variants={cardReveal}
       className="group relative"
     >
-      <div className="relative overflow-hidden rounded-2xl bg-stone-100">
-        {/* Image */}
-        <div className="aspect-[4/5] overflow-hidden rounded-2xl">
+      <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-stone-100">
+        {/* Image - 3:4 aspect for good height while fitting 3-up */}
+        <div className="aspect-[3/4] overflow-hidden rounded-xl sm:rounded-2xl">
           <motion.div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${item.image})` }}
             whileHover={{ scale: 1.06 }}
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/70 via-charcoal-900/20 to-transparent" />
           {/* Large number */}
-          <span className="absolute bottom-4 right-4 font-serif text-7xl md:text-8xl font-bold text-white/20 leading-none select-none">
+          <span className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 md:bottom-4 md:right-4 font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white/25 leading-none select-none">
             {item.number}
           </span>
         </div>
 
         {/* Content overlay (bottom of image) */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-          <span className="text-champagne-400 text-[10px] uppercase tracking-[0.3em] font-medium">
+        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 lg:p-8">
+          <span className="text-champagne-400 text-[9px] sm:text-[10px] uppercase tracking-[0.25em] font-medium hidden sm:inline">
             {item.number}
           </span>
-          <h3 className="font-serif text-2xl md:text-3xl text-white mt-1 tracking-tight">
+          <h3 className="font-serif text-sm sm:text-xl md:text-2xl lg:text-3xl text-white mt-0.5 sm:mt-1 font-semibold tracking-tight leading-tight line-clamp-2 sm:line-clamp-none">
             {item.title}
           </h3>
         </div>
       </div>
 
       {/* Text below card */}
-      <div className="mt-4 px-1">
-        <p className="text-stone-500 text-sm md:text-base leading-relaxed">
+      <div className="mt-3 sm:mt-4 px-0">
+          <p className="font-sans text-stone-500 text-xs sm:text-sm md:text-base leading-relaxed line-clamp-2 sm:line-clamp-none">
           {item.description}
         </p>
       </div>
@@ -93,19 +93,19 @@ function Card({
 
 export default function ImageTextGrid() {
   return (
-    <section className="pt-12 pb-28 md:pt-16 md:pb-40 bg-white overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
+    <section className="pt-8 sm:pt-12 pb-16 sm:pb-28 md:pt-16 md:pb-40 bg-white overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-10">
         <motion.header
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14 md:mb-20"
+          className="text-center mb-8 sm:mb-14 md:mb-20"
         >
           <p className="text-champagne-600 uppercase tracking-[0.2em] text-xs font-bold mb-2">
             The Studio
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl text-charcoal-900 tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal-900 tracking-tight">
             Showcase
           </h2>
         </motion.header>
@@ -115,7 +115,7 @@ export default function ImageTextGrid() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10"
+          className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-10"
         >
           {SHOWCASE_ITEMS.map((item, index) => (
             <React.Fragment key={item.id}>

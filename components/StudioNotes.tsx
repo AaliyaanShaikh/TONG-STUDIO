@@ -52,24 +52,26 @@ const articles = [
 
 const StudioNotes: React.FC = () => {
   return (
-    <section id="journal" className="bg-[#0d0d0d] py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16 md:mb-20"
-        >
-          <h2 className="font-serif text-4xl md:text-5xl text-white tracking-tight">
-            Studio Notes
-          </h2>
-          <p className="mt-3 text-stone-400 font-medium max-w-md">
-            Insights from our podcast booths, photo sets, and creator sessions.
-          </p>
-        </motion.div>
+    <section id="journal" className="bg-[#0d0d0d] py-16 sm:py-24 md:py-32">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
+        <div className="mb-16 md:mb-20">
+          <div className="h-px w-full bg-white/25 mb-8 md:mb-10" />
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="font-sans text-2xl sm:text-3xl md:text-4xl text-white tracking-tight font-semibold">
+              Studio Notes
+            </h3>
+            <p className="font-sans mt-3 text-stone-400 font-medium max-w-md">
+              Insights from our podcast booths, photo sets, and creator sessions.
+            </p>
+          </motion.div>
+        </div>
 
         {/* Bento grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 md:gap-5">
           {articles.map((article, index) => (
             <motion.article
               key={article.title}
@@ -77,7 +79,7 @@ const StudioNotes: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
-              className={`group cursor-pointer rounded-2xl overflow-hidden bg-stone-800 ${
+              className={`group cursor-pointer rounded-xl sm:rounded-2xl overflow-hidden bg-stone-800 ${
                 article.size === 'large'
                   ? 'md:col-span-7 md:row-span-2'
                   : article.size === 'medium'
@@ -89,10 +91,10 @@ const StudioNotes: React.FC = () => {
                 <div
                   className={`relative overflow-hidden ${
                     article.size === 'large'
-                      ? 'h-[280px] md:h-full min-h-[320px]'
+                      ? 'h-[200px] sm:h-[240px] md:h-full min-h-[260px] md:min-h-[320px]'
                       : article.size === 'medium'
-                        ? 'h-[200px] md:h-[240px]'
-                        : 'h-[180px] md:h-[200px]'
+                        ? 'h-[160px] sm:h-[180px] md:h-[240px]'
+                        : 'h-[140px] sm:h-[160px] md:h-[200px]'
                   }`}
                 >
                   <img
@@ -102,20 +104,20 @@ const StudioNotes: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div
-                    className={`absolute bottom-0 left-0 right-0 p-5 md:p-6 ${
+                    className={`absolute bottom-0 left-0 right-0 p-3 sm:p-5 md:p-6 ${
                       article.size === 'large' ? 'md:p-8' : ''
                     }`}
                   >
-                    <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/70 font-medium">
+                    <span className="font-sans text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/70 font-medium">
                       {article.category}
                     </span>
                     <h3
-                      className={`font-serif text-white mt-1 font-semibold leading-tight ${
+                      className={`font-sans text-white mt-0.5 sm:mt-1 font-semibold leading-tight ${
                         article.size === 'large'
-                          ? 'text-xl md:text-2xl lg:text-3xl'
+                          ? 'text-base sm:text-lg md:text-xl lg:text-2xl'
                           : article.size === 'medium'
-                            ? 'text-lg md:text-xl'
-                            : 'text-base md:text-lg'
+                            ? 'text-sm sm:text-base md:text-lg'
+                            : 'text-sm sm:text-base md:text-lg'
                       }`}
                     >
                       {article.title}
@@ -137,7 +139,7 @@ const StudioNotes: React.FC = () => {
                   </div>
                 </div>
                 {article.size !== 'large' && (
-                  <div className="p-4 md:p-5">
+                  <div className="p-3 sm:p-4 md:p-5">
                     <p className="text-stone-400 text-sm line-clamp-2">
                       {article.excerpt}
                     </p>
@@ -157,12 +159,12 @@ const StudioNotes: React.FC = () => {
           viewport={{ once: true }}
           className="mt-12 flex justify-center"
         >
-          <a
-            href="#"
+          <button
+            type="button"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-stone-600 text-stone-300 hover:text-white hover:border-white/50 text-sm font-medium transition-colors"
           >
             View All Articles <ArrowUpRight size={14} strokeWidth={2} />
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>

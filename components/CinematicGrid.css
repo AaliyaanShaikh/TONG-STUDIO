@@ -1,7 +1,7 @@
 /* Scroll-lock section */
 .cinematic-scroll-section {
   position: relative;
-  height: 300vh;
+  height: 180vh;
   background: #f6f6f6;
 }
 
@@ -18,12 +18,9 @@
 .cinematic-split-wrapper {
   position: relative;
   width: 100%;
-  max-width: 1400px;
+  max-width: none;
+  height: 100vh;
   margin: 0 auto;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Each half shows 50% of the grid via clip-path, then slides away */
@@ -33,8 +30,8 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 1400px;
-  height: auto;
+  max-width: none;
+  height: 100vh;
   will-change: transform;
   overflow: hidden;
 }
@@ -47,36 +44,41 @@
   clip-path: inset(0 0 0 50%);
 }
 
-/* Full 4-column grid - original layout */
+/* Full 4-column grid - fills entire viewport, no grey space */
 .cinematic-grid {
-  max-width: 1400px;
+  --row-height: calc((100vh - 40px) / 3);
+  width: 100%;
+  max-width: none;
+  height: calc(3 * var(--row-height) + 40px);
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  padding: 0 40px;
+  grid-template-rows: var(--row-height) var(--row-height) var(--row-height);
+  gap: 20px;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 /* Grid Types - original sizes */
 .grid-item {
   overflow: hidden;
-  border-radius: 40px;
+  border-radius: 24px;
   opacity: 0;
   transform: translateY(40px);
 }
 
 .grid-item.square {
-  height: 260px;
+  min-height: 0;
 }
 
 .grid-item.tall {
   grid-row: span 2;
-  height: 540px;
+  min-height: 0;
 }
 
 .grid-item.wide {
   grid-column: span 2;
-  height: 260px;
+  min-height: 0;
 }
 
 .grid-item img {
@@ -84,7 +86,7 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  border-radius: 40px;
+  border-radius: 24px;
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -115,8 +117,8 @@
 }
 
 .cinematic-cta-title {
-  font-family: Cormorant Garamond, Georgia, serif;
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.25rem, 3.5vw, 2.25rem);
   font-weight: 600;
   color: #1a1a1a;
   letter-spacing: 0.02em;
@@ -124,23 +126,23 @@
 }
 
 .cinematic-cta-price {
-  font-family: system-ui, sans-serif;
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
   font-weight: 500;
   color: #555;
   letter-spacing: 0.05em;
-  margin: 0 0 1.25rem 0;
+  margin: 0 0 0.75rem 0;
 }
 
 .cinematic-cta {
   display: inline-block;
-  font-family: Cormorant Garamond, Georgia, serif;
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
   font-weight: 600;
   color: #1a1a1a;
   letter-spacing: 0.02em;
   text-decoration: none;
-  padding: 0.75rem 1.75rem;
+  padding: 0.5rem 1.25rem;
   border: 2px solid #1a1a1a;
   border-radius: 8px;
   transition: background 0.3s ease, color 0.3s ease;
@@ -151,59 +153,62 @@
   color: #f6f6f6;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .cinematic-grid {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 0 24px;
-  }
-
-  .grid-item.square {
-    height: 200px;
-  }
-
-  .grid-item.tall {
-    height: 420px;
-  }
-
-  .grid-item.wide {
-    height: 200px;
-  }
-}
-
+/* Mobile: 2-column layout, same animation */
 @media (max-width: 768px) {
   .cinematic-scroll-section {
     height: 200vh;
   }
 
+  .cinematic-grid-half.left {
+    clip-path: inset(0 50% 0 0);
+  }
+
+  .cinematic-grid-half.right {
+    clip-path: inset(0 0 0 50%);
+  }
+
   .cinematic-grid {
-    gap: 16px;
-    padding: 0 16px;
+    --row-height: calc((100vh - 48px) / 5);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, var(--row-height));
+    gap: 12px;
+    padding: 0 12px;
+    height: calc(5 * var(--row-height) + 48px);
   }
 
   .grid-item.square {
-    height: 160px;
+    /* 1 row */
   }
 
   .grid-item.tall {
-    height: 340px;
+    grid-row: span 2;
   }
 
   .grid-item.wide {
-    height: 160px;
+    grid-column: span 2;
+  }
+
+  .grid-item {
+    border-radius: 16px;
+  }
+
+  .grid-item img {
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 16px;
   }
 
   .cinematic-cta-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   .cinematic-cta-price {
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
   }
 
   .cinematic-cta {
-    font-size: 1rem;
-    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
   }
 }

@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  /* Fonts */
-  --font-serif: "Cormorant Garamond", serif;
-  --font-sans: "Montserrat", sans-serif;
+  /* Fonts - use consistently:
+     font-serif (Cormorant Garamond): section titles, headings, card titles
+     font-sans (Montserrat): taglines, body text, labels, descriptions */
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Montserrat", system-ui, sans-serif;
 
   /* Champagne */
   --color-champagne-100: #F9F5EB;
@@ -48,6 +50,14 @@ html {
   background-color: #FAFAFA;
   scroll-behavior: smooth;
   overscroll-behavior: none;
+}
+
+/* Safe area insets for notched devices (iPhone X+, etc.) */
+:root {
+  --sat: env(safe-area-inset-top);
+  --sab: env(safe-area-inset-bottom);
+  --sal: env(safe-area-inset-left);
+  --sar: env(safe-area-inset-right);
 }
 
 body {
